@@ -1,0 +1,14 @@
+{
+  "name": "to-do-app",
+  "version": "1.0.0",
+  "description": "To do list generator",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Marko P",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
