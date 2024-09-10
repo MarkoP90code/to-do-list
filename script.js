@@ -5,7 +5,7 @@
 //splice
 //remove
 //localStorage - ima objasnjenje na dnu koda i u wordu. Valjda od koraka 48 do koraka 53.
-import "core-js/actual"
+
 //1.
 const taskForm = document.getElementById("task-form");
 const confirmCloseDialog = document.getElementById("confirm-close-dialog");
