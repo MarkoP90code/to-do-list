@@ -70,7 +70,7 @@ window.deleteTask = function(buttonEl) {       //Na button sam stavio onclick pa
  
      localStorage.setItem("data", JSON.stringify(taskData));    //Kad obrisem nesto uradi update. Posto imam splice() ne treba mi localStorage.removiItem() ili localStorage.clear()
     };
-console.log(editTask);
+
 //7.
 const editTask = (buttonEl) => {
     const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
