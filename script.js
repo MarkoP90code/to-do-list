@@ -55,7 +55,7 @@ const updateTaskContainer = () => {             //Ne kontam zasto ne radi isto a
         <p><strong>Title:</strong> ${title}</p>
         <p><strong>Date:</strong> ${date}</p>
         <p><strong>Description:</strong> ${description}</p>
-        <button  type="button" class="btn">Edit</button>
+        <button onclick="editTask(this)" type="button" class="btn">Edit</button>
         <button onclick="deleteTask(this)" type="button" class="btn">Delete</button> 
         </div>   
         `;                                                          //Obratiti paznju na += posto u nekom od ranijih zadataka sam imao samo =.
