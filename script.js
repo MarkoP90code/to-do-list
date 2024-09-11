@@ -55,15 +55,15 @@ const updateTaskContainer = () => {             //Ne kontam zasto ne radi isto a
         <p><strong>Title:</strong> ${title}</p>
         <p><strong>Date:</strong> ${date}</p>
         <p><strong>Description:</strong> ${description}</p>
-        <button onClick="editTask(this)" type="button" class="btn">Edit</button>
-        <button onClick="deleteTask(this)" type="button" class="btn">Delete</button> 
+        <button onclick="editTask(this)" type="button" class="btn">Edit</button>
+        <button onclick="deleteTask(this)" type="button" class="btn">Delete</button> 
         </div>   
         `;                                                          //Obratiti paznju na += posto u nekom od ranijih zadataka sam imao samo =.
     });
     }
 
 //6. Nije sesto nego je neki veci broj ali ne mogu da ispatim pa onda bar otprilike.
-const deleteTask = (buttonEl) => {       //Na button sam stavio onclick pa sad pravim funkciju.
+window.deleteTask = function(buttonEl) {       //Na button sam stavio onclick pa sad pravim funkciju.
      const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);      //dataArrIndex imam i u addOrUpdateTask() funkciji ali ovo je druga funkcija i mogu da koristim isto ime. Sa var valjda ne bi mogao.       
      buttonEl.parentElement.remove();        //Ovde uklanjam buttonEl.parentElement sto mislim da je <div class="task" id="${id}">
      taskData.splice(dataArrIndex, 1);       //Step 38. splice() is an array method that modifies arrays by removing, replacing, or adding elements at a specified index, while also returning the removed elements. It can take up to three arguments: the first one is the mandatory index at which to start, the second is the number of items to remove, and the third is an optional replacement element. U ovom slucaju uklanjam elemenat koji pocinje na mestu sa indexom dataArrIndex i duzine je 1. Tako da taskData vise nema taj element. 
