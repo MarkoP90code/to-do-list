@@ -45,6 +45,9 @@ const addOrUpdateTask = () => {
     reset();
     };
 
+    
+
+const updateTaskContainer = () => {   
     const editTask = (buttonEl) => {
         const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
         currentTask = taskData[dataArrIndex];   //Ovde prvi put dodeljujemo currentTasku nesto sto nije orazan objekat {}.
@@ -54,9 +57,7 @@ const addOrUpdateTask = () => {
     
         addOrUpdateTaskBtn.innerText = "Update Task";           //Promeni dugme da pise update task umesto add task.
         taskForm.classList.toggle("hidden");                    //Pozove modal da se pojavi. trenutno je hidden ali uradim toggle pa mu skinem hidden clasu.
-    };  
-
-const updateTaskContainer = () => {             //Ne kontam zasto ne radi isto ako izvacim ovo i umesto += u trecem redu stavim samo =.
+    };            //Ne kontam zasto ne radi isto ako izvacim ovo i umesto += u trecem redu stavim samo =.
     tasksContainer.innerHTML ="";
     taskData.forEach(({id, title, date, description}) => {          //Step 16. - forEach() imam u wordu, a ovde u zagradi radim destructuring.
         tasksContainer.innerHTML += `
@@ -82,7 +83,7 @@ window.deleteTask = function(buttonEl) {       //Na button sam stavio onclick pa
 
 //7.
 
-console.log(editTask);
+
 //4.
 const reset = () => {           //If you attempt to add another task now, you'll notice that the input fields retain the values you entered for the previous task. To resolve this, you need to clear the input fields after adding a task. Instead of clearing the input fields one by one, it's a good practice to create a function that handles clearing those fields. You can then call this function whenever you need to clear the input fields again. Use arrow syntax to create a reset function and set it to a pair of curly braces.
     titleInput.value = "";
