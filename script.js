@@ -70,7 +70,7 @@ window.deleteTask = function(buttonEl) {       //Na button sam stavio onclick pa
  
      localStorage.setItem("data", JSON.stringify(taskData));    //Kad obrisem nesto uradi update. Posto imam splice() ne treba mi localStorage.removiItem() ili localStorage.clear()
     };
-
+console.log(editTask);
 //7.
 const editTask = (buttonEl) => {
     const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
@@ -82,7 +82,7 @@ const editTask = (buttonEl) => {
     addOrUpdateTaskBtn.innerText = "Update Task";           //Promeni dugme da pise update task umesto add task.
     taskForm.classList.toggle("hidden");                    //Pozove modal da se pojavi. trenutno je hidden ali uradim toggle pa mu skinem hidden clasu.
 };  
-
+console.log(editTask);
 //4.
 const reset = () => {           //If you attempt to add another task now, you'll notice that the input fields retain the values you entered for the previous task. To resolve this, you need to clear the input fields after adding a task. Instead of clearing the input fields one by one, it's a good practice to create a function that handles clearing those fields. You can then call this function whenever you need to clear the input fields again. Use arrow syntax to create a reset function and set it to a pair of curly braces.
     titleInput.value = "";
