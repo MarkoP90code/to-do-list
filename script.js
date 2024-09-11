@@ -45,19 +45,9 @@ const addOrUpdateTask = () => {
     reset();
     };
 
-    
 
-const updateTaskContainer = () => {   
-    const editTask = (buttonEl) => {
-        const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
-        currentTask = taskData[dataArrIndex];   //Ovde prvi put dodeljujemo currentTasku nesto sto nije orazan objekat {}.
-        titleInput.value = currentTask.title;   //Ovde sam namestam da kad stisnem edit otvori prozor sa podacima od tog na koji sam kliknuo.
-        dateInput.value = currentTask.date;
-        descriptionInput.value = currentTask.description;
-    
-        addOrUpdateTaskBtn.innerText = "Update Task";           //Promeni dugme da pise update task umesto add task.
-        taskForm.classList.toggle("hidden");                    //Pozove modal da se pojavi. trenutno je hidden ali uradim toggle pa mu skinem hidden clasu.
-    };            //Ne kontam zasto ne radi isto ako izvacim ovo i umesto += u trecem redu stavim samo =.
+
+const updateTaskContainer = () => {             //Ne kontam zasto ne radi isto ako izvacim ovo i umesto += u trecem redu stavim samo =.
     tasksContainer.innerHTML ="";
     taskData.forEach(({id, title, date, description}) => {          //Step 16. - forEach() imam u wordu, a ovde u zagradi radim destructuring.
         tasksContainer.innerHTML += `
@@ -73,7 +63,7 @@ const updateTaskContainer = () => {
     }
 
 //6. Nije sesto nego je neki veci broj ali ne mogu da ispatim pa onda bar otprilike.
-window.deleteTask = function(buttonEl) {       //Na button sam stavio onclick pa sad pravim funkciju.
+window.deleteTask = function(buttonEl) {       //Na button sam stavio onclick pa sad pravim funkciju.     //Ovde je bila arrow function const deleteTask = (buttonEl) => {... ali sam promenuo jer onclick nece da radi na netlify.
      const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);      //dataArrIndex imam i u addOrUpdateTask() funkciji ali ovo je druga funkcija i mogu da koristim isto ime. Sa var valjda ne bi mogao.       
      buttonEl.parentElement.remove();        //Ovde uklanjam buttonEl.parentElement sto mislim da je <div class="task" id="${id}">
      taskData.splice(dataArrIndex, 1);       //Step 38. splice() is an array method that modifies arrays by removing, replacing, or adding elements at a specified index, while also returning the removed elements. It can take up to three arguments: the first one is the mandatory index at which to start, the second is the number of items to remove, and the third is an optional replacement element. U ovom slucaju uklanjam elemenat koji pocinje na mestu sa indexom dataArrIndex i duzine je 1. Tako da taskData vise nema taj element. 
@@ -82,7 +72,16 @@ window.deleteTask = function(buttonEl) {       //Na button sam stavio onclick pa
     };
 
 //7.
+window.editTask = function(buttonEl) {
+    const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
+    currentTask = taskData[dataArrIndex];   //Ovde prvi put dodeljujemo currentTasku nesto sto nije orazan objekat {}.
+    titleInput.value = currentTask.title;   //Ovde sam namestam da kad stisnem edit otvori prozor sa podacima od tog na koji sam kliknuo.
+    dateInput.value = currentTask.date;
+    descriptionInput.value = currentTask.description;
 
+    addOrUpdateTaskBtn.innerText = "Update Task";           //Promeni dugme da pise update task umesto add task.
+    taskForm.classList.toggle("hidden");                    //Pozove modal da se pojavi. trenutno je hidden ali uradim toggle pa mu skinem hidden clasu.
+};  
 
 //4.
 const reset = () => {           //If you attempt to add another task now, you'll notice that the input fields retain the values you entered for the previous task. To resolve this, you need to clear the input fields after adding a task. Instead of clearing the input fields one by one, it's a good practice to create a function that handles clearing those fields. You can then call this function whenever you need to clear the input fields again. Use arrow syntax to create a reset function and set it to a pair of curly braces.
@@ -99,9 +98,10 @@ if(taskData.length) {
   }
 
 //3. - Opening and closing the form modal.
-openTaskFormBtn.addEventListener("click", () =>                 //ovde je implicit return pa ne trebaju {}. Mada koliko vidim i kad ih stavim radi isto.
-  taskForm.classList.toggle("hidden")                           //Pokaze taskForm.
-);
+openTaskFormBtn.addEventListener("click", () => {                 //ovde je implicit return pa ne trebaju {}. Mada koliko vidim i kad ih stavim radi isto.
+  taskForm.classList.toggle("hidden");                              //Pokaze taskForm.
+  addOrUpdateTaskBtn.innerText = "Add Task";                    //Ovo je zato sto nakon sto stisnemo edit pa update task onda kad idemo add new task ne pise dole add task nego i dalje update task.                   
+});
 
 closeTaskFormBtn.addEventListener("click", ()=> {           //Kad stisnem X ako ne jesto napisano izbacice modal sa "cancel" i "discard" (confirmCloseDialog.showModal()), ako nista nije onda pozove reset() funkciju.     
     const formInputsContainValues = titleInput.value || dateInput.value || descriptionInput.value;      //Step 28. You should display the Cancel and Discard buttons to the user only if there is some text present in the input fields.
